@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CineLand</title>
+    {% load static %} {% block css %} {% endblock %}
+    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo" class="logo">
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'galeria' %}">Galeria</a>
+                </li>
+                <li>
+                    <a href="{% url 'nueva_pelicula' %}">Nueva Pelicula</a>
+                </li>
+                <li>
+                    <a href="{% url 'listado_peliculas' %}">Listado Peliculas</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="#">Usuario: {{ user.username }}</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Cerrar Seccion</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar Seccion</a>
+                </li>
+                <li>
+                    <a href="{% url 'registro_usuario' %}">Registrar</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <div id="principal">
+        <br>
+        <div class="container">
+            {% block contenido %} {% endblock %}
+        </div>
+
+
+
+
+    </div>
+
+    <footer class="hide_on_mobile">
+        <div>
+            <img src="{% static 'core/img/logo.png' %}" alt="logo" class="logo_footer">
+        </div>
+
+    </footer>
+
+
+    <footer class="hide_on_desktop">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo" class="logo_footer_mobile">
+    </footer>
+
+    {% block javascript %} {% endblock %}
+
+
+    <script src="js/basico.js"></script>
+</body>
+
+</html>
